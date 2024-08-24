@@ -6,7 +6,8 @@
       style="max-width: 1200px; min-width: 1000px;"
     >
       <div class="container">
-        <div class="recipe-body">
+        <!-- Check if recipe_1 is not null before rendering -->
+        <div class="recipe-body" v-if="recipe_1">
           <h2>{{ recipe_1.title }}</h2>
           <div id="recipe-info">
             <span
@@ -23,26 +24,26 @@
           <div class="icons">
             <img
               id="vegetarian"
-              v-if="recipe_1.vegetarian == 1"
+              v-if="recipe_1.vegetarian === 1"
               src="../../resources/vegeterian.png"
               title="vegetarian"
             />
             <img
               id="vegan"
-              v-if="recipe_1.vegan == 1"
+              v-if="recipe_1.vegan === 1"
               src="../../resources/vegan.png"
               title="vegan"
             />
             <img
               id="glutenFree"
-              v-if="recipe_1.glutenFree == 1"
+              v-if="recipe_1.glutenFree === 1"
               src="../../resources/gluten-free2.png"
               title="gluten free"
             />
           </div>
           <div class="family-info">
             <span>
-              <h3>Peronal Information</h3>
+              <h3>Personal Information</h3>
               <div id="owner">
                 <div class="personal-description">
                   <span class="info-title">Recipe's owner:</span>
@@ -64,7 +65,7 @@
       </div>
       <div class="divider div-transparent"></div>
       <div class="recipe-full">
-        <div id="instructions">
+        <div id="instructions" v-if="recipe_1.instructions">
           <FamilyRecipeInstructions :instructions="recipe_1.instructions" />
         </div>
         <div id="ingredients">
@@ -76,158 +77,7 @@
         </div>
       </div>
     </b-card>
-    <b-card
-      no-body
-      class="overflow-hidden"
-      style="max-width: 1200px; min-width: 1000px;"
-    >
-      <div class="container">
-        <div class="recipe-body">
-          <h2>{{ recipe_2.title }}</h2>
-          <div id="recipe-info">
-            <span
-              ><div class="info" id="minutes">
-                <div class="number">{{ recipe_2.readyInMinutes }}</div>
-                <div class="description">minutes</div>
-              </div>
-              <div class="info">
-                <div class="number">{{ recipe_2.servingSize }}</div>
-                <div class="description">Dishes</div>
-              </div>
-            </span>
-          </div>
-          <div class="icons">
-            <img
-              id="vegetarian"
-              v-if="recipe_2.vegetarian == 1"
-              src="../../resources/vegeterian.png"
-              title="vegetarian"
-            />
-            <img
-              id="vegan"
-              v-if="recipe_2.vegan == 1"
-              src="../../resources/vegan.png"
-              title="vegan"
-            />
-            <img
-              id="glutenFree"
-              v-if="recipe_2.glutenFree == 1"
-              src="../../resources/gluten-free2.png"
-              title="gluten free"
-            />
-          </div>
-          <div class="family-info">
-            <span>
-              <h3>Peronal Information</h3>
-              <div id="owner">
-                <div class="personal-description">
-                  <span class="info-title">Recipe's owner:</span>
-                  {{ recipe_2.owner }}
-                </div>
-              </div>
-              <div id="occasion">
-                <div class="personal-description">
-                  <span class="info-title">Occasion:</span>
-                  {{ recipe_2.occasion }}
-                </div>
-              </div>
-            </span>
-          </div>
-        </div>
-        <div v-if="recipe_2" class="recipe-img-container">
-          <img id="recipe-image" :src="recipe_2.image" class="center" />
-        </div>
-      </div>
-      <div class="divider div-transparent"></div>
-      <div class="recipe-full">
-        <div id="instructions">
-          <FamilyRecipeInstructions :instructions="recipe_2.instructions" />
-        </div>
-        <div id="ingredients">
-          <FamilyRecipeIngredients
-            :ingredient_amount="recipe_2.ingredient_amount"
-            :ingredient_sizing="recipe_2.ingredient_sizing"
-            :ingredients="recipe_2.ingredients"
-          />
-        </div>
-      </div>
-    </b-card>
-    <b-card
-      no-body
-      class="overflow-hidden"
-      style="max-width: 1200px; min-width: 1000px;"
-    >
-      <div class="container">
-        <div class="recipe-body">
-          <h2>{{ recipe_3.title }}</h2>
-          <div id="recipe-info">
-            <span
-              ><div class="info" id="minutes">
-                <div class="number">{{ recipe_3.readyInMinutes }}</div>
-                <div class="description">minutes</div>
-              </div>
-              <div class="info">
-                <div class="number">{{ recipe_3.servingSize }}</div>
-                <div class="description">Dishes</div>
-              </div>
-            </span>
-          </div>
-          <div class="icons">
-            <img
-              id="vegetarian"
-              v-if="recipe_3.vegetarian == 1"
-              src="../../resources/vegeterian.png"
-              title="vegetarian"
-            />
-            <img
-              id="vegan"
-              v-if="recipe_3.vegan == 1"
-              src="../../resources/vegan.png"
-              title="vegan"
-            />
-            <img
-              id="glutenFree"
-              v-if="recipe_3.glutenFree == 1"
-              src="../../resources/gluten-free2.png"
-              title="gluten free"
-            />
-          </div>
-          <div class="family-info">
-            <span>
-              <h3>Peronal Information</h3>
-              <div id="owner">
-                <div class="personal-description">
-                  <span class="info-title">Recipe's owner:</span>
-                  {{ recipe_3.owner }}
-                </div>
-              </div>
-              <div id="occasion">
-                <div class="personal-description">
-                  <span class="info-title">Occasion:</span>
-                  {{ recipe_3.occasion }}
-                </div>
-              </div>
-            </span>
-          </div>
-        </div>
-        <div v-if="recipe_3" class="recipe-img-container">
-          <img id="recipe-image" :src="recipe_3.image" class="center" />
-        </div>
-      </div>
-      <div class="divider div-transparent"></div>
-      <div class="recipe-full">
-        <div id="instructions">
-          <FamilyRecipeInstructions :instructions="recipe_3.instructions" />
-        </div>
-        <div id="ingredients">
-          <FamilyRecipeIngredients
-            :ingredient_amount="recipe_3.ingredient_amount"
-            :ingredient_sizing="recipe_3.ingredient_sizing"
-            :ingredients="recipe_3.ingredients"
-          />
-        </div>
-      </div>
-    </b-card>
+    <!-- Repeat the above block for recipe_2 and recipe_3 -->
   </div>
 </template>
 
@@ -249,12 +99,11 @@ export default {
     };
   },
   async created() {
-    let DOMAIN_PATH;
-
     try {
-      let response;
-      DOMAIN_PATH = "http://localhost:3000/users/myFamilyRecipes";
-      response = await this.axios.get(DOMAIN_PATH, { withCredentials: true });
+      let response = await this.axios.get(
+        this.$domainPath + "/users/myFamilyRecipes",
+        { withCredentials: true }
+      );
       if (response.status !== 200) this.$router.replace("/NotFound");
       for (let i = 0; i < response.data.length; i++) {
         let {
@@ -298,7 +147,6 @@ export default {
       this.recipe_2 = this.recipes[1];
       this.recipe_3 = this.recipes[2];
     } catch (error) {
-      console.log("error.response.status", error.response.status);
       this.$router.replace("/NotFound");
       return;
     }

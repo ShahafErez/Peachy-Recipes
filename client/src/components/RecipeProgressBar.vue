@@ -29,7 +29,6 @@ export default {
   mounted() {
     this.max = this.get_Session_Value()[1];
     this.value = this.get_Session_Value()[0];
-    console.log("recipe progress bar this.value : " + this.value);
   },
   methods: {
     get_Session_Value() {

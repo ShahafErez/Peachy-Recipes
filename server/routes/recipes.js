@@ -80,9 +80,6 @@ router.get("/:recipeId", async (req, res, next) => {
   if (is_personal === undefined) {
     is_personal = false;
   }
-  console.log(
-    `recipe detail function. recipe id ${req.params.recipeId} user id ${req.session.user_id} and is personal ${is_personal}`
-  );
   try {
     if (recipe_id) {
       recipe = await recipes_utils.viewRecipe(user_id, recipe_id);

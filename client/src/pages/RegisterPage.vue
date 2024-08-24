@@ -180,15 +180,15 @@
 
 <script>
 import passwordMeter from "vue-simple-password-meter";
-import countries from "../assets/countries";
 import {
-  required,
-  minLength,
-  maxLength,
   alpha,
-  sameAs,
   email,
+  maxLength,
+  minLength,
+  required,
+  sameAs,
 } from "vuelidate/lib/validators";
+import countries from "../assets/countries";
 
 export default {
   components: { passwordMeter },
@@ -254,10 +254,8 @@ export default {
       return $dirty ? !$error : null;
     },
     async Register() {
-      const DOMAIN_PATH = "http://localhost:3000";
-      console.log("register function");
       try {
-        const response = await this.axios.post(DOMAIN_PATH + "/Register", {
+        const response = await this.axios.post(this.$domainPath + "/Register", {
           username: this.form.username,
           password: this.form.password,
           firstname: this.form.firstname,

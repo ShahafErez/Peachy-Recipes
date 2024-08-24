@@ -26,8 +26,8 @@
 </template>
 
 <script>
-import RecipePreviewHorizontal from "./RecipePreviewHorizontal.vue";
 import Login from "./Login.vue";
+import RecipePreviewHorizontal from "./RecipePreviewHorizontal.vue";
 export default {
   name: "RecipePreviewList",
   components: {
@@ -45,16 +45,17 @@ export default {
   },
   methods: {
     async changeRandom() {
-      console.log("changing the random recipes");
       await this.getRandom();
       this.componentKey += 1;
     },
     async getRandom() {
-      const DOMAIN_PATH = "http://localhost:3000";
       try {
-        const response = await this.axios.get(DOMAIN_PATH + "/recipes/random", {
-          withCredentials: true,
-        });
+        const response = await this.axios.get(
+          this.$domainPath + "/recipes/random",
+          {
+            withCredentials: true,
+          }
+        );
         const recipes = response.data;
         this.randomRecipes = [];
         this.randomRecipes.push(...recipes);
@@ -63,11 +64,10 @@ export default {
       }
     },
     async updateRecipes() {
-      const DOMAIN_PATH = "http://localhost:3000";
       try {
         const response = await this.axios
           .create({ withCredentials: true })
-          .get(DOMAIN_PATH + "/users/lastThreeViewed", {
+          .get(this.$domainPath + "/users/lastThreeViewed", {
             withCredentials: true,
           });
         const recipes = response.data;

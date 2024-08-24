@@ -31,7 +31,6 @@ router.post("/favorites", async (req, res, next) => {
     const recipe_id = req.body.recipeId;
     const is_personal = req.query.personal;
     if (recipe_id) {
-      console.log(`recipe ${recipe_id} was mark as favorite by ${user_id}`);
       let marked = await dbFunctionality_utils.markAsFavorite(
         user_id,
         recipe_id,
@@ -54,8 +53,6 @@ router.delete("/favorites", async (req, res, next) => {
     const recipe_id = req.body.recipeId;
     const is_personal = req.query.personal;
     if (recipe_id) {
-      console.log(`recipe ${recipe_id} was unmark as favorite by ${user_id}`);
-
       let unmarked = await dbFunctionality_utils.unmarkAsFavorite(
         user_id,
         recipe_id,
@@ -134,7 +131,6 @@ router.get("/personals", async (req, res, next) => {
 router.get("/myFamilyRecipes", async (req, res, next) => {
   try {
     const user_id = req.session.user_id;
-    console.log("in- get gamily recipes, user_id: " + user_id);
     const family_recipes = await recipes_utils.getFamilyRecipes(user_id);
     if (family_recipes.length > 0) {
       res.status(200).send(family_recipes);
@@ -152,7 +148,6 @@ router.get("/myFamilyRecipes", async (req, res, next) => {
  */
 router.get("/lastThreeViewed", async (req, res, next) => {
   const user_id = req.session.user_id;
-  console.log("getting the last 3 recipes viewed by user " + user_id);
   try {
     const last_viewed_recipes = await recipes_utils.getNewestViewed(user_id, 3);
     if (last_viewed_recipes.length > 0) {
@@ -184,7 +179,6 @@ router.get("/personal/:recipeId", async (req, res, next) => {
     if (receips && receips != -1) {
       res.status(200).send(receips);
     } else {
-      console.log("this user does not have a personal recipe with that id");
       res.status(204).send({
         message: "no recipe was found with that id",
         success: false,
@@ -195,44 +189,42 @@ router.get("/personal/:recipeId", async (req, res, next) => {
     next(error);
   }
 });
-router.post("/upcommingMeal/:recipeId", async (req, res, next) => {
+router.post("/upcomingMeal/:recipeId", async (req, res, next) => {
   const user_id = req.session.user_id;
   let is_personal = req.query.isPersonal;
   let recipe_id = req.params.recipeId;
-  console.log(is_personal);
   try {
     if (recipe_id) {
-      await recipes_utils.addRecipeToUpcommingMeal(
+      await recipes_utils.addRecipeToUpcomingMeal(
         user_id,
         recipe_id,
         is_personal
       );
-      res.status(200).send("Recipe successfully added to Upcomming meal");
+      res.status(200).send("Recipe successfully added to Upcoming meal");
     }
   } catch (error) {
     next(error);
   }
 });
 
-// get UpcommingMeal recipes
-router.get("/upcommingMeal", async (req, res, next) => {
+// get UpcomingMeal recipes
+router.get("/upcomingMeal", async (req, res, next) => {
   try {
     const user_id = req.session.user_id;
-    const meal_recipes = await recipes_utils.getUpcommingMealRecipes(user_id);
+    const meal_recipes = await recipes_utils.getUpcomingMealRecipes(user_id);
     res.status(200).send(meal_recipes);
   } catch (error) {
     next(error);
   }
 });
 
-// get number of upcomming meals
-router.get("/NumRecipesUpcommingMeal", async (req, res, next) => {
+// get number of upcoming meals
+router.get("/NumRecipesUpcomingMeal", async (req, res, next) => {
   try {
     const user_id = req.session.user_id;
-    const meal_recipes = await recipes_utils.getNumOfUpcommingMealRecipes(
+    const meal_recipes = await recipes_utils.getNumOfUpcomingMealRecipes(
       user_id
     );
-    console.log("!! " + meal_recipes);
     res.status(200).send(" " + meal_recipes); // TODO- need to recive at string at 3.3
   } catch (error) {
     next(error);
@@ -246,7 +238,6 @@ router.put("/changeRecipeOrderInMeal", async (req, res, next) => {
     const recipe_id = req.body.recipeId;
     const new_order = req.body.neworder;
     if (recipe_id && new_order) {
-      console.log(req.body.recipeId, req.body.neworder);
       await recipes_utils.changeRecipeOrder(user_id, recipe_id, new_order);
       res
         .status(200)
@@ -273,7 +264,6 @@ router.delete("/removeRecipeFromMeal", async (req, res, next) => {
 
 //delete all list
 router.delete("/removeAllRecipesFromMeal", async (req, res, next) => {
-  console.log("remove all");
   try {
     const user_id = req.session.user_id;
     await recipes_utils.removeAllRecipeFromMeal(user_id);
@@ -287,7 +277,6 @@ router.delete("/removeAllRecipesFromMeal", async (req, res, next) => {
  * Error handling
  */
 router.use(function (err, req, res, next) {
-  console.log(err);
   res.status(500).send("server error");
 });
 

@@ -3,10 +3,10 @@ require("dotenv").config();
 
 const config = {
   connectionLimit: 4,
-  host: process.env.host,
-  user: process.env.user,
-  password: process.env.DBpass,
-  database: process.env.database,
+  host: process.env.HOST,
+  user: process.env.USER,
+  password: process.env.PASSWORD,
+  database: process.env.DATABASE,
 };
 const pool = new mysql.createPool(config);
 

@@ -5,7 +5,7 @@
     style="max-width: 1200px; min-width: 1000px;"
   >
     <div class="container">
-      <div class="recipe-body">
+      <div class="recipe-body" v-if="recipe">
         <h2>{{ recipe.title }}</h2>
         <div id="recipe-info">
           <span
@@ -145,89 +145,81 @@ export default {
     };
   },
   async created() {
-    let DOMAIN_PATH;
-
+    let domain_path = this.$domainPath;
+    let full_path = this.$route.query.isPersonal
+      ? `${domain_path}/users/personal/${this.$route.params.recipeId}`
+      : `${domain_path}/recipes/${this.$route.params.recipeId}`;
+    let response;
     try {
-      let response;
+      response = await this.axios
+        .create({ withCredentials: true })
+        .get(full_path);
 
-      if (this.$route.query.isPersonal) {
-        DOMAIN_PATH = "http://localhost:3000/users/personal/";
-      } else {
-        DOMAIN_PATH = "http://localhost:3000/recipes/";
-      }
-
-      try {
-        response = await this.axios
-          .create({ withCredentials: true })
-          .get(DOMAIN_PATH + this.$route.params.recipeId);
-
-        if (response.status !== 200) this.$router.replace("/NotFound");
-      } catch (error) {
-        this.$router.replace("/NotFound");
-        return;
-      }
-      let {
-        analyzedInstructions,
-        extendedIngredients,
-        previewInfo,
-        first_time,
-      } = response.data;
-
-      let {
-        id,
-        popularity,
-        readyInMinutes,
-        image,
-        title,
-        vegan,
-        vegetarian,
-        glutenFree,
-        isFavorite,
-        isViewed,
-        servingSize,
-      } = response.data.previewInfo;
-
-      let _instructions;
-      if (analyzedInstructions[0].steps.length != 0) {
-        _instructions = analyzedInstructions
-          .map((fstep) => {
-            fstep.steps[0].step = fstep.name + fstep.steps[0].step;
-            return fstep.steps;
-          })
-          .reduce((a, b) => [...a, ...b], []);
-      }
-
-      let _recipe = {
-        _instructions,
-        analyzedInstructions,
-        extendedIngredients,
-        popularity,
-        readyInMinutes,
-        image,
-        title,
-        vegan,
-        vegetarian,
-        glutenFree,
-        isFavorite,
-        isViewed,
-        previewInfo,
-        servingSize,
-        first_time,
-        id,
-      };
-
-      if (this.readyInMinutes === null || this.readyInMinutes === undefined) {
-        this.readyInMinutes = "0";
-      }
-
-      if (servingSize === null || servingSize === undefined) {
-        this.servingSize = 0;
-      }
-
-      this.recipe = _recipe;
+      if (response.status !== 200) this.$router.replace("/NotFound");
     } catch (error) {
-      console.log(error);
+      console.log("error ", error);
+      this.$router.replace("/NotFound");
+      return;
     }
+    let {
+      analyzedInstructions,
+      extendedIngredients,
+      previewInfo,
+      first_time,
+    } = response.data;
+
+    let {
+      id,
+      popularity,
+      readyInMinutes,
+      image,
+      title,
+      vegan,
+      vegetarian,
+      glutenFree,
+      isFavorite,
+      isViewed,
+      servingSize,
+    } = response.data.previewInfo;
+
+    let _instructions;
+    if (analyzedInstructions[0].steps.length != 0) {
+      _instructions = analyzedInstructions
+        .map((fstep) => {
+          fstep.steps[0].step = fstep.name + fstep.steps[0].step;
+          return fstep.steps;
+        })
+        .reduce((a, b) => [...a, ...b], []);
+    }
+
+    let _recipe = {
+      _instructions,
+      analyzedInstructions,
+      extendedIngredients,
+      popularity,
+      readyInMinutes,
+      image,
+      title,
+      vegan,
+      vegetarian,
+      glutenFree,
+      isFavorite,
+      isViewed,
+      previewInfo,
+      servingSize,
+      first_time,
+      id,
+    };
+
+    if (this.readyInMinutes === null || this.readyInMinutes === undefined) {
+      this.readyInMinutes = "0";
+    }
+
+    if (servingSize === null || servingSize === undefined) {
+      this.servingSize = 0;
+    }
+
+    this.recipe = _recipe;
   },
   methods: {
     onMakeNow() {
@@ -250,14 +242,14 @@ export default {
       this.mul_dishes += 1;
     },
     async addToMeal() {
-      let DOMAIN_PATH = "http://localhost:3000/users/upcomingMeal/";
+      let domain_path = this.$domainPath + "/users/upcomingMeal/";
       this.addToMealLabel = "Added to meal";
 
       try {
         response = await this.axios
           .create({ withCredentials: true })
           .post(
-            DOMAIN_PATH +
+            domain_path +
               this.recipe.id +
               "?isPersonal=" +
               this.$route.query.isPersonal

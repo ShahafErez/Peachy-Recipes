@@ -230,11 +230,11 @@
 
 <script>
 import {
-  required,
-  maxLength,
   alpha,
-  url,
+  maxLength,
   numeric,
+  required,
+  url,
 } from "vuelidate/lib/validators";
 export default {
   name: "NewRecipe",
@@ -339,7 +339,6 @@ export default {
       if (this.$v.form.$anyError) {
         return;
       }
-      console.log(`submitting recipe`);
 
       await this.AddRecipe();
       this.onReset();
@@ -368,11 +367,10 @@ export default {
         });
       }
 
-      const DOMAIN_PATH = "http://localhost:3000";
       try {
         await this.axios
           .create({ withCredentials: true })
-          .post(DOMAIN_PATH + "/users/add", {
+          .post(this.$domainPath + "/users/add", {
             title: this.form.title,
             image: this.form.image,
             readyInMinutes: this.form.readyInMinutes,
