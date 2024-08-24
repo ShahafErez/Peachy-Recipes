@@ -34,10 +34,9 @@ export default {
 
   methods: {
     async markFavorite(recipe) {
-      const DOMAIN_PATH = "http://localhost:3000";
       try {
         await this.axios.create({ withCredentials: true }).post(
-          DOMAIN_PATH + "/users/favorites",
+          this.$domainPath + "/users/favorites",
           { recipeId: recipe.id },
           {
             params: {
@@ -57,11 +56,10 @@ export default {
       }
     },
     async unmarkFavorite(recipe) {
-      const DOMAIN_PATH = "http://localhost:3000";
       try {
         await this.axios
           .create({ withCredentials: true })
-          .delete(DOMAIN_PATH + "/users/favorites", {
+          .delete(this.$domainPath + "/users/favorites", {
             data: {
               recipeId: recipe.id,
             },

@@ -70,6 +70,9 @@ Vue.use(VueAxios, axios);
 
 Vue.config.productionTip = false;
 
+// Define global variables
+Vue.prototype.$domainPath = process.env.DOMAIN_PATH || "http://localhost:3000";
+
 const shared_data = {
   username: localStorage.username,
   user_id: localStorage.user_id,

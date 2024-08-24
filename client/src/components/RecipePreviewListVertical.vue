@@ -46,10 +46,9 @@ export default {
   },
   methods: {
     async updateRecipes() {
-      const DOMAIN_PATH = "http://localhost:3000";
       try {
         const response = await this.axios.get(
-          DOMAIN_PATH + "/users/" + this.type,
+          this.$domainPath + "/users/" + this.type,
           { withCredentials: true }
         );
         if (response.status == 200) {

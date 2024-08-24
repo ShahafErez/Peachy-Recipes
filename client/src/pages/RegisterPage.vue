@@ -254,9 +254,8 @@ export default {
       return $dirty ? !$error : null;
     },
     async Register() {
-      const DOMAIN_PATH = "http://localhost:3000";
       try {
-        const response = await this.axios.post(DOMAIN_PATH + "/Register", {
+        const response = await this.axios.post(this.$domainPath + "/Register", {
           username: this.form.username,
           password: this.form.password,
           firstname: this.form.firstname,

@@ -367,11 +367,10 @@ export default {
         });
       }
 
-      const DOMAIN_PATH = "http://localhost:3000";
       try {
         await this.axios
           .create({ withCredentials: true })
-          .post(DOMAIN_PATH + "/users/add", {
+          .post(this.$domainPath + "/users/add", {
             title: this.form.title,
             image: this.form.image,
             readyInMinutes: this.form.readyInMinutes,

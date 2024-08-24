@@ -99,12 +99,11 @@ export default {
     };
   },
   async created() {
-    let DOMAIN_PATH;
-
     try {
-      let response;
-      DOMAIN_PATH = "http://localhost:3000/users/myFamilyRecipes";
-      response = await this.axios.get(DOMAIN_PATH, { withCredentials: true });
+      let response = await this.axios.get(
+        this.$domainPath + "/users/myFamilyRecipes",
+        { withCredentials: true }
+      );
       if (response.status !== 200) this.$router.replace("/NotFound");
       for (let i = 0; i < response.data.length; i++) {
         let {

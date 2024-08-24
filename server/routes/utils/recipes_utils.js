@@ -1,7 +1,7 @@
 const axios = require("axios");
 const dbFunctionality_utils = require("./DbFunctionality_utils");
 const api_domain = "https://api.spoonacular.com/recipes";
-const apiKey = "09ee89c75d7347ecba4764efbec737e0"; // todo- env
+const apiKey = process.env.SPOONACULAR_KEY;
 
 //  Get recipes list from spoonacular response and extract the relevant recipe data for preview
 async function getRecipeInformation(recipe_id) {

@@ -85,11 +85,10 @@ export default {
   },
   methods: {
     async getUpcomingMeal() {
-      const DOMAIN_PATH = "http://localhost:3000";
       try {
         let res = await this.axios
           .create({ withCredentials: true })
-          .get(DOMAIN_PATH + "/users/upcomingMeal", {
+          .get(this.$domainPath + "/users/upcomingMeal", {
             withCredentials: true,
           });
         this.todo_recipes = res.data;
@@ -98,13 +97,12 @@ export default {
       }
     },
     async moveDown(r) {
-      const DOMAIN_PATH = "http://localhost:3000/";
       if (r.order == this.todo_recipes.length) {
         return;
       }
       try {
         await this.axios.create({ withCredentials: true }).put(
-          DOMAIN_PATH + "users/changeRecipeOrderInMeal",
+          this.$domainPath + "/users/changeRecipeOrderInMeal",
           {
             recipeId: r.recipe_preview.id,
             neworder: r.order + 1,
@@ -117,13 +115,12 @@ export default {
       }
     },
     async moveUp(r) {
-      const DOMAIN_PATH = "http://localhost:3000/";
       if (r.order == 1) {
         return;
       }
       try {
         await this.axios.create({ withCredentials: true }).put(
-          DOMAIN_PATH + "users/changeRecipeOrderInMeal",
+          this.$domainPath + "/users/changeRecipeOrderInMeal",
           {
             recipeId: r.recipe_preview.id,
             neworder: r.order - 1,
@@ -136,11 +133,10 @@ export default {
       }
     },
     async remove(r) {
-      const DOMAIN_PATH = "http://localhost:3000/";
       try {
         await this.axios
           .create({ withCredentials: true })
-          .delete(DOMAIN_PATH + "users/removeRecipeFromMeal", {
+          .delete(this.$domainPath + "/users/removeRecipeFromMeal", {
             data: { recipeId: r.recipe_preview.id },
           });
         let numOfMeals = localStorage.getItem("cart");
@@ -155,12 +151,11 @@ export default {
         confirm("No recipes in current meal");
         return;
       }
-      const DOMAIN_PATH = "http://localhost:3000/";
 
       try {
         await this.axios
           .create({ withCredentials: true })
-          .delete(DOMAIN_PATH + "users/removeAllRecipesFromMeal", {});
+          .delete(this.$domainPath + "/users/removeAllRecipesFromMeal", {});
         this.getUpcomingMeal();
         localStorage.setItem("cart", 0);
         confirm("All recipes from current meal were successfully removed");

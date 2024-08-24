@@ -76,9 +76,8 @@ export default {
       localStorage.setItem("cart", 0);
       this.$root.store.logout();
       this.$root.toast("Logout", "User logged out successfully", "success");
-      const DOMAIN_PATH = "http://localhost:3000";
       try {
-        await this.axios.post(DOMAIN_PATH + "/Logout");
+        await this.axios.post(this.$domainPath + "/Logout");
       } catch (err) {
         this.form.submitError = err.response.data.message;
       }
@@ -88,11 +87,10 @@ export default {
       });
     },
     async getNumOfMeals() {
-      const DOMAIN_PATH = "http://localhost:3000";
       try {
         let response = await this.axios
           .create({ withCredentials: true })
-          .get(DOMAIN_PATH + "/users/NumRecipesUpcomingMeal", {
+          .get(this.$domainPath + "/users/NumRecipesUpcomingMeal", {
             withCredentials: true,
           });
         this.numOfMeals = response.data.toString();

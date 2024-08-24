@@ -88,10 +88,9 @@ export default {
       return $dirty ? !$error : null;
     },
     async Login() {
-      const DOMAIN_PATH = "http://localhost:3000";
       try {
         const response = await this.axios.post(
-          DOMAIN_PATH + "/Login",
+          this.$domainPath + "/Login",
           {
             username: this.form.username,
             password: this.form.password,
