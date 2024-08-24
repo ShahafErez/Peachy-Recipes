@@ -46,13 +46,6 @@
                   >My Recipes</router-link
                 ></b-dropdown-item
               >
-              <b-dropdown-item
-                ><router-link
-                  class="navbar-brand"
-                  :to="{ name: 'familyRecipes' }"
-                  >Family Recipes</router-link
-                ></b-dropdown-item
-              >
             </b-dropdown>
             <div class="add-button">
               <b-button v-b-modal.modal-1>Add Recipe</b-button>
@@ -99,7 +92,7 @@ export default {
       try {
         let response = await this.axios
           .create({ withCredentials: true })
-          .get(DOMAIN_PATH + "/users/NumRecipesupcomingMeal", {
+          .get(DOMAIN_PATH + "/users/NumRecipesUpcomingMeal", {
             withCredentials: true,
           });
         this.numOfMeals = response.data.toString();

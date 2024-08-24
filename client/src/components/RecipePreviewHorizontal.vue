@@ -10,7 +10,7 @@
         id="recipe-preview"
       >
         <div class="recipe-body">
-          <img v-if="image_load" :src="recipe.image" class="card-img-top" />
+          <img id="recipe-image" :src="recipe.image" class="card-img-top" />
         </div>
       </router-link>
 
@@ -75,17 +75,6 @@ export default {
   name: "RecipePreviewHorizontal",
   components: {
     FavoriteButton,
-  },
-  mounted() {
-    console.log("recipe preview mounted");
-    this.axios.get(this.recipe.image).then((i) => {
-      this.image_load = true;
-    });
-  },
-  data() {
-    return {
-      image_load: false,
-    };
   },
   props: {
     recipe: {

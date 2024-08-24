@@ -5,7 +5,7 @@
     style="max-width: 1200px; min-width: 1000px;"
   >
     <div class="container">
-      <div class="recipe-body">
+      <div class="recipe-body" v-if="recipe">
         <h2>{{ recipe.title }}</h2>
         <div id="recipe-info">
           <span

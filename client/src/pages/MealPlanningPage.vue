@@ -77,14 +77,14 @@ export default {
     };
   },
   mounted() {
-    this.getupcomingMeal();
+    this.getUpcomingMeal();
   },
   components: {
     RecipePreviewHorizontal,
     RecipeProgressBar,
   },
   methods: {
-    async getUpcommingMeal() {
+    async getUpcomingMeal() {
       const DOMAIN_PATH = "http://localhost:3000";
       try {
         let res = await this.axios
@@ -111,8 +111,7 @@ export default {
           },
           { withCredentials: true }
         );
-        console.log("order changed");
-        this.getupcomingMeal();
+        this.getUpcomingMeal();
       } catch (error) {
         console.log(error);
       }
@@ -131,8 +130,7 @@ export default {
           },
           { withCredentials: true }
         );
-        console.log("order changed");
-        this.getupcomingMeal();
+        this.getUpcomingMeal();
       } catch (error) {
         console.log(error);
       }
@@ -147,7 +145,7 @@ export default {
           });
         let numOfMeals = localStorage.getItem("cart");
         localStorage.setItem("cart", parseInt(numOfMeals) - 1);
-        this.getupcomingMeal();
+        this.getUpcomingMeal();
       } catch (error) {
         console.log(error);
       }
@@ -163,7 +161,7 @@ export default {
         await this.axios
           .create({ withCredentials: true })
           .delete(DOMAIN_PATH + "users/removeAllRecipesFromMeal", {});
-        this.getupcomingMeal();
+        this.getUpcomingMeal();
         localStorage.setItem("cart", 0);
         confirm("All recipes from current meal were successfully removed");
       } catch (error) {

@@ -230,11 +230,11 @@
 
 <script>
 import {
-  required,
-  maxLength,
   alpha,
-  url,
+  maxLength,
   numeric,
+  required,
+  url,
 } from "vuelidate/lib/validators";
 export default {
   name: "NewRecipe",
@@ -339,7 +339,6 @@ export default {
       if (this.$v.form.$anyError) {
         return;
       }
-      console.log(`submitting recipe`);
 
       await this.AddRecipe();
       this.onReset();

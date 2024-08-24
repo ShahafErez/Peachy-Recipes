@@ -1,7 +1,7 @@
 const axios = require("axios");
 const dbFunctionality_utils = require("./DbFunctionality_utils");
 const api_domain = "https://api.spoonacular.com/recipes";
-const apiKey = "411023d4f80f4343ae075458621e21c8";
+const apiKey = "09ee89c75d7347ecba4764efbec737e0"; // todo- env
 
 //  Get recipes list from spoonacular response and extract the relevant recipe data for preview
 async function getRecipeInformation(recipe_id) {
@@ -471,19 +471,19 @@ async function getPersonalAnalyzedInstructions(recipe_id) {
 }
 
 /* bonus*/
-async function addRecipeToUpcommingMeal(user_id, recipe_id, personal) {
-  await dbFunctionality_utils.addRecipeToUpcommingMeal(
+async function addRecipeToUpcomingMeal(user_id, recipe_id, personal) {
+  await dbFunctionality_utils.addRecipeToUpcomingMeal(
     user_id,
     recipe_id,
     personal
   );
   console.log(
-    `recipe number ${recipe_id} was added by user ${user_id} to upcomming meal`
+    `recipe number ${recipe_id} was added by user ${user_id} to upcoming meal`
   );
 }
 
-async function getUpcommingMealRecipes(user_id) {
-  let recipes = await dbFunctionality_utils.getRecipesUpcommingMeal(user_id);
+async function getUpcomingMealRecipes(user_id) {
+  let recipes = await dbFunctionality_utils.getRecipesUpcomingMeal(user_id);
   let recipes_preview = [];
   for (let recipe of recipes) {
     if (recipe.isPersonal == 1) {
@@ -509,14 +509,14 @@ async function changeRecipeOrder(user_id, recipeId, neworder) {
   );
 }
 
-async function getNumOfUpcommingMealRecipes(user_id) {
+async function getNumOfUpcomingMealRecipes(user_id) {
   let num = await dbFunctionality_utils.getOrderOfLastRecipe(user_id);
   num = num - 1;
   return num;
 }
 
 async function removeRecipeFromMeal(user_id, recipeId) {
-  let num = await getNumOfUpcommingMealRecipes(user_id);
+  let num = await getNumOfUpcomingMealRecipes(user_id);
   await changeRecipeOrder(user_id, recipeId, num);
   await dbFunctionality_utils.removeRecipeFromMeal(user_id, recipeId);
 }
@@ -542,10 +542,10 @@ exports.getAnalyzedInstructions = getAnalyzedInstructions;
 exports.getPersonalFull = getPersonalFull;
 exports.getRecipePreviewPersonal = getRecipePreviewPersonal;
 exports.getPersonalAnalyzedInstructions = getPersonalAnalyzedInstructions;
-exports.addRecipeToUpcommingMeal = addRecipeToUpcommingMeal;
-exports.getUpcommingMealRecipes = getUpcommingMealRecipes;
+exports.addRecipeToUpcomingMeal = addRecipeToUpcomingMeal;
+exports.getUpcomingMealRecipes = getUpcomingMealRecipes;
 exports.changeRecipeOrder = changeRecipeOrder;
-exports.getNumOfUpcommingMealRecipes = getNumOfUpcommingMealRecipes;
+exports.getNumOfUpcomingMealRecipes = getNumOfUpcomingMealRecipes;
 exports.removeRecipeFromMeal = removeRecipeFromMeal;
 exports.removeAllRecipeFromMeal = removeAllRecipeFromMeal;
 exports.getFamilyRecipes = getFamilyRecipes;

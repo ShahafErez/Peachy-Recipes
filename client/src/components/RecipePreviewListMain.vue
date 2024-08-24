@@ -26,8 +26,8 @@
 </template>
 
 <script>
-import RecipePreviewHorizontal from "./RecipePreviewHorizontal.vue";
 import Login from "./Login.vue";
+import RecipePreviewHorizontal from "./RecipePreviewHorizontal.vue";
 export default {
   name: "RecipePreviewList",
   components: {
@@ -45,7 +45,6 @@ export default {
   },
   methods: {
     async changeRandom() {
-      console.log("changing the random recipes");
       await this.getRandom();
       this.componentKey += 1;
     },

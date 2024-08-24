@@ -124,7 +124,7 @@ paths:
             type: string
             description: parameter can be fed with any of these intolerances 'https://spoonacular.com/food-api/docs#Intolerances'
             example: Peanut
-          
+
       responses:
         "200":
           description: success in returning search results.
@@ -187,7 +187,7 @@ paths:
                   $ref: "#/components/schemas/recipePreviewInfo"
         "204":
           description: no favorite recipes for current user
-          
+
     post:
       tags:
         - users
@@ -211,7 +211,7 @@ paths:
           description: The Recipe successfully saved as favorite
         "409":
           description: recipe was already added as favorite
-    
+
     delete:
       tags:
         - users
@@ -235,7 +235,7 @@ paths:
           description: The Recipe successfully removed from favorites
         "409":
           description: recipe was not marked as favorite
-  
+
   /users/personals:
     get:
       tags:
@@ -253,7 +253,7 @@ paths:
                   $ref: "#/components/schemas/recipePreviewInfo"
         "204":
           description: no private recipes for current user
-          
+
   /users/personal/{recipeId}:
     get:
       tags:
@@ -278,7 +278,7 @@ paths:
                 $ref: "#/components/schemas/recipeFullInfo"
         "204":
           description: no private recipe was found with that id
-          
+
   /users/myFamilyRecipes:
     get:
       tags:
@@ -345,8 +345,8 @@ paths:
                   $ref: "#/components/schemas/recipePreviewInfo"
         "204":
           description: current user didn't watch any recipes yet.
-          
-  /users/upcommingMeal/{recipeId}:
+
+  /users/upcomingMeal/{recipeId}:
     post:
       tags:
         - users
@@ -369,9 +369,9 @@ paths:
             $ref: "#/components/schemas/recipes"
       responses:
         "200":
-          description: Recipe successfully added to Upcomming meal
-          
-  /users/upcommingMeal:
+          description: Recipe successfully added to Upcoming meal
+
+  /users/upcomingMeal:
     get:
       tags:
         - users
@@ -385,8 +385,8 @@ paths:
                 type: array
                 items:
                   $ref: "#/components/schemas/recipeInMeal"
-  
-  /users/NumRecipesUpcommingMeal:
+
+  /users/NumRecipesUpcomingMeal:
     get:
       tags:
         - users
@@ -399,7 +399,7 @@ paths:
               schema:
                 type: integer
                 example: 3
-  
+
   /users/changeRecipeOrderInMeal:
     put:
       tags:
@@ -413,7 +413,7 @@ paths:
       responses:
         "200":
           description: recipe order in current user's meal plan changed successfully
-     
+
   /users/removeRecipeFromMeal:
     delete:
       tags:
@@ -427,7 +427,7 @@ paths:
       responses:
         "200":
           description: recipe was deleted successfully from current user's meal plan
-          
+
   /users/removeAllRecipesFromMeal:
     delete:
       tags:
@@ -593,7 +593,7 @@ components:
     userFamilyRecipes:
       type: object
       properties:
-        recipe_id: 
+        recipe_id:
           type: integer
           description: recipe's id
           example: 5
@@ -653,7 +653,7 @@ components:
           type: integer
           description: number of servings
           example: 4
-        
+
       description: user's family recipe
     recipeFullInfo:
       type: object
@@ -671,7 +671,7 @@ components:
         first_time:
           type: boolean
       description: is it the first time user see this recipe
-    
+
     recipeNewOrder:
       type: object
       properties:
@@ -681,7 +681,7 @@ components:
           type: integer
           description: new order of recipe
           example: 2
-          
+
     recipeAddInfo:
       type: object
       properties:
@@ -695,7 +695,7 @@ components:
           type: array
           items:
             $ref: "#/components/schemas/analyzedInstructions"
-        
+
     recipeInMeal:
       type: object
       properties:

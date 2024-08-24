@@ -422,9 +422,9 @@ async function getFamilyRecipes(user_id) {
 
 // ----------------------------- Bonus -----------------------------
 
-async function addRecipeToUpcommingMeal(user_id, recipe_id, personal) {
+async function addRecipeToUpcomingMeal(user_id, recipe_id, personal) {
   let personal_val;
-  console.log("personal in DBFunc addRecipeToUpcommingMeal is: " + personal);
+  console.log("personal in DBFunc addRecipeToUpcomingMeal is: " + personal);
   if (personal == "true") {
     //TODO- changed
     personal_val = 1;
@@ -448,7 +448,7 @@ async function getOrderOfLastRecipe(user_id) {
   return max_order;
 }
 
-async function getRecipesUpcommingMeal(user_id) {
+async function getRecipesUpcomingMeal(user_id) {
   return await DButils.execQuery(
     `SELECT recipe_id,isPersonal,order_num FROM mealplanningrecipes WHERE user_id=${user_id} ORDER BY order_num;`
   );
@@ -463,7 +463,6 @@ async function changeRecipeOrderInMeal(user_id, recipeId, neworder) {
     old_order = Number(res[0]["order_num"]);
   });
 
-  
   if (old_order < neworder) {
     await DButils.execQuery(`UPDATE mealplanningrecipes 
     SET order_num = order_num-1
@@ -503,8 +502,8 @@ exports.getPersonalRecipePreview = getPersonalRecipePreview;
 exports.getPersonalRecipes = getPersonalRecipes;
 exports.getAdditionalInformationPersonal = getAdditionalInformationPersonal;
 exports.getAnalyzedInstructionsPersonal = getAnalyzedInstructionsPersonal;
-exports.addRecipeToUpcommingMeal = addRecipeToUpcommingMeal;
-exports.getRecipesUpcommingMeal = getRecipesUpcommingMeal;
+exports.addRecipeToUpcomingMeal = addRecipeToUpcomingMeal;
+exports.getRecipesUpcomingMeal = getRecipesUpcomingMeal;
 exports.changeRecipeOrderInMeal = changeRecipeOrderInMeal;
 exports.getOrderOfLastRecipe = getOrderOfLastRecipe;
 exports.removeRecipeFromMeal = removeRecipeFromMeal;

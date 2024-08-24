@@ -1,32 +1,32 @@
-import Vue from "vue";
-import App from "./App.vue";
-import VueAxios from "vue-axios";
 import axios from "axios";
+import Vue from "vue";
+import VueAxios from "vue-axios";
+import App from "./App.vue";
 
-import routes from "./routes";
 import VueRouter from "vue-router";
+import routes from "./routes";
 Vue.use(VueRouter);
 const router = new VueRouter({
   routes,
 });
 
-import Vuelidate from "vuelidate";
-import "bootstrap/dist/css/bootstrap.css";
-import "bootstrap-vue/dist/bootstrap-vue.css";
 import {
-  FormGroupPlugin,
-  FormPlugin,
-  FormInputPlugin,
-  ButtonPlugin,
-  CardPlugin,
-  NavbarPlugin,
-  FormSelectPlugin,
   AlertPlugin,
-  ToastPlugin,
-  LayoutPlugin,
   BootstrapVue,
   BootstrapVueIcons,
+  ButtonPlugin,
+  CardPlugin,
+  FormGroupPlugin,
+  FormInputPlugin,
+  FormPlugin,
+  FormSelectPlugin,
+  LayoutPlugin,
+  NavbarPlugin,
+  ToastPlugin,
 } from "bootstrap-vue";
+import "bootstrap-vue/dist/bootstrap-vue.css";
+import "bootstrap/dist/css/bootstrap.css";
+import Vuelidate from "vuelidate";
 [
   FormGroupPlugin,
   FormPlugin,
@@ -76,15 +76,12 @@ const shared_data = {
   login(username, user_id) {
     localStorage.setItem("username", username);
     this.username = username;
-    console.log("login", this.username);
     localStorage.setItem("user_id", user_id);
     this.user_id = user_id;
-    console.log("login user_id", this.user_id);
     let temp = { 0: [0, 0] };
     sessionStorage.setItem("making_progress", JSON.stringify(temp));
   },
   logout() {
-    console.log("logout");
     localStorage.removeItem("username");
     localStorage.removeItem("last_search_str");
     localStorage.removeItem("user_id");

@@ -106,13 +106,11 @@ export default {
       }
     },
     onLogin() {
-      console.log("login method called");
       this.form.submitError = undefined;
       this.$v.form.$touch();
       if (this.$v.form.$anyError) {
         return;
       }
-      console.log("login method go");
 
       this.Login();
     },
@@ -121,7 +119,7 @@ export default {
       try {
         let response = await this.axios
           .create({ withCredentials: true })
-          .get(DOMAIN_PATH + "/users/NumRecipesupcomingMeal", {
+          .get(DOMAIN_PATH + "/users/NumRecipesUpcomingMeal", {
             withCredentials: true,
           });
         localStorage.setItem("cart", response.data.toString());

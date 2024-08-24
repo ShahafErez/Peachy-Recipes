@@ -46,7 +46,6 @@
 </template>
 
 <script>
-import { kMaxLength } from "buffer";
 export default {
   name: "Instructions",
   props: {
@@ -60,8 +59,8 @@ export default {
     },
   },
   created() {
-    this.max = 0;
-    this.value = getSessionValue();
+    // Initialize value with the session value
+    this.value = this.getSessionValue();
   },
   data() {
     return {
@@ -72,7 +71,6 @@ export default {
     };
   },
   mounted() {
-    console.log("mounted make recipe");
     let str_step = "";
     let minStep = 0;
     let isDone_ = false;
@@ -127,7 +125,6 @@ export default {
       temp[this.r_id] = [this.value, this.steps_todo.length];
       sessionStorage.setItem("making_progress", JSON.stringify(temp));
       temp1 = sessionStorage.making_progress;
-      console.log("temp1: " + temp1);
     },
     canClickButton(step) {
       let len = this.selected.length;

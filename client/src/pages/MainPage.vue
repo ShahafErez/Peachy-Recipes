@@ -26,9 +26,6 @@ export default {
   data() {
     return {};
   },
-  mounted() {
-    console.log("main page mounted");
-  },
   components: {
     RecipePreviewListMain,
   },

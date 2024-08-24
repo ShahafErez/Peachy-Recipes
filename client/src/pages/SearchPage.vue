@@ -139,7 +139,7 @@
 </template>
 
 <script>
-import { required, minLength } from "vuelidate/lib/validators";
+import { minLength, required } from "vuelidate/lib/validators";
 import cuisines from "../assets/cuisines";
 import diets from "../assets/diets";
 import intolerances from "../assets/intolerances";
@@ -204,7 +204,6 @@ export default {
     async Search() {
       this.lastSearchUsername = localStorage.username;
       const DOMAIN_PATH = "http://localhost:3000";
-      console.log("search function");
       //get results
       try {
         let last_search_str = `Your last search was: ${this.userSearchTerm}\n
